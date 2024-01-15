@@ -11,21 +11,21 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/event")
+@RequestMapping("/api/pe")
 public class EventController {
     private final EventService eventService;
 
-    @GetMapping({"/v1/{id}", "/internal/v1/{id}"})
+    @GetMapping({"/v1/event/{id}", "/internal/v1/event/{id}"})
     public ResponseEntity<List<EventDto>> getEvents(@PathVariable Long id){
         return eventService.getEvent(id);
     }
 
-    @GetMapping({"/v1", "/internal/v1"})
+    @GetMapping({"/v1/event", "/internal/v1/event"})
     public ResponseEntity<List<EventDto>> getEventsByFilter(EventFilterDto eventFilterDto){
         return eventService.getEventFilter(eventFilterDto);
     }
 
-    @PostMapping({"/v1", "/internal/v1"})
+    @PostMapping({"/v1/event", "/internal/v1/event"})
     public ResponseEntity<String> saveEvent(@RequestBody EventSaveDto saveDto){
         return eventService.save(saveDto);
     }

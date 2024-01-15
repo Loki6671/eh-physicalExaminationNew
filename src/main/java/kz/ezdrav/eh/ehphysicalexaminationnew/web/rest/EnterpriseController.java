@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/enterprise")
+@RequestMapping("/api/pe")
 @RequiredArgsConstructor
 public class EnterpriseController {
 
     private final EnterpriseService enterpriseService;
 
 
-    @GetMapping({"/v1/{id}", "/internal/v1/{id}"})
+    @GetMapping({"/v1/enterprise/{id}", "/internal/v1/enterprise/{id}"})
     public ResponseEntity<List<EnterpriseDto>> getEnterprises(@PathVariable Long id){
         return enterpriseService.getEnterprises(id);
     }
 
-    @PostMapping({"/v1", "/internal/v1"})
+    @PostMapping({"/v1/enterprise", "/internal/v1/enterprise"})
     public ResponseEntity<String> saveEnterprise( @RequestBody EnterpriseSaveDto saveDto){
         return enterpriseService.save(saveDto);
     }

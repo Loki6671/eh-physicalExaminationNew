@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: eh-lmk
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME_LMK:postgres}
+    username: ${DB_USER:lmk}
+    password: ${DB_PASSWORD:123}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+  liquibase:
+    changeLog: 'classpath:/liquibase/db.changelog-master.yaml'
+
+cxf:
+  path: /api/lmk/soap
+
+
+#liquibase:
+#    database-change-log-lock-table: sys_db_change_log_lock
+#    database-change-log-table: sys_db_change_log
+#    change-log: 'classpath:/liquibase/changelog/db.changelog-master.yaml'
+
+
+server:
+  forward-headers-strategy: framework
+
+oauth2:
+  resourceserver:
+    jwt:
+      public-key: ${OAUTH2_JWT_PUBLICKEY}
+
+logging:
+  level:
+    liquibase: DEBUG
+
+#  logging:
+#    level:
+#      org:
+#        apache:
+#          cxf: DEBUG
+#        springframework: DEBUG
+#      kz:
+#        ezdrav:
+#          eh: DEBUG
+feign:
+  url:
+    eh-rpn:

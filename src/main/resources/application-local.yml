@@ -1,0 +1,28 @@
+spring:
+  cloud:
+    kubernetes:
+      enabled: false
+
+oauth2:
+  resourceserver:
+    jwt:
+      public-key: |
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz+MC9Agw1ZefBKGFKRY0
+        Tx9+CSs46jjpMxn9RYR+Bk7v//8ukwmCYUWfJh0mv0v8AwwB+sp8e42F1mnKCtF7
+        Z3p94Hyp4iC3Bc5/6zDf1gTmSurDO5R8WQY6geBLF29g/MIOSj9ipCmcAr803N10
+        7qUYLRw9ISG2l22yhz05oZfzIbohmjmd1u5G2UaqXipIxEMWFRh7LKY3FvP+kWQI
+        YUFrxMb0it2cHFEEhckOdvKTSbqeKSb4LweBJdX6Dxq4TwzH9rEDhJuF0Bikj2QI
+        0zYQmHefhNEzCbcgEcQPmEG9fpQ0HYY0XZF8o3DUV5mi8K+zYD4peQNj5zRu0f9Q
+        jwIDAQAB
+        -----END PUBLIC KEY-----
+feign:
+  url:
+    eh-rpn: 'http://localhost:8150'
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: DEBUG

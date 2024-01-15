@@ -5,6 +5,7 @@ import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -27,4 +28,8 @@ public class Event {
     private String epid;
     private String committee;
     private Boolean confirmed;
+    @ManyToMany
+    private Set<Danger> dangers;
+    @ManyToOne
+    private Enterprise enterprise;
 }

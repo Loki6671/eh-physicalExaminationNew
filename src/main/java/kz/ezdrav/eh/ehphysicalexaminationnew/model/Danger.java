@@ -22,5 +22,7 @@ public class Danger {
     private Set<Doctor> doctor;
     @ManyToMany
     private Set<Contraindication> contraindications;
+    @ManyToMany
+    private Set<MedicalProcedure> medicalProcedures;
 
 }

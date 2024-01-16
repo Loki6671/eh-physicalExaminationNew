@@ -19,15 +19,14 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator",  allocationSize = 1)
     private Long id;
-    private Long name;
-    private String surname;
-    private String patronymic;
+    private String fio;
     private String iin;
+    private LocalDateTime birthDate;
+    private String adress;
     private Boolean gender;
     private String job;
     private Integer experienceByJob;
     private Integer fullExperience;
-    private LocalDateTime lastPhys;
     private Boolean dangerStatus;
     private Boolean sickList;
     private Boolean trip;
@@ -36,4 +35,7 @@ public class Patient {
     private Boolean reject;
     @ManyToOne
     private Enterprise enterprise;
+    @ManyToMany
+    private Set<Danger> dangers;
+    private String medPlace;
 }

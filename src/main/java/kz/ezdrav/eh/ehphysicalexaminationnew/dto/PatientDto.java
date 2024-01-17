@@ -13,6 +13,7 @@ import java.util.List;
 public class PatientDto {
     private Long id;
     private String fio;
+    private LocalDateTime birthDate;
     private Boolean gender;
     private String job;
     private Integer experienceByJob;

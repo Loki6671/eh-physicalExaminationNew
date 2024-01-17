@@ -10,4 +10,5 @@ import lombok.*;
 public class EnterpriseDto {
     private String id;
     private String name;
+    private String address;
 }

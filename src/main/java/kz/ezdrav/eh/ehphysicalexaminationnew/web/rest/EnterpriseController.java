@@ -1,7 +1,6 @@
 package kz.ezdrav.eh.ehphysicalexaminationnew.web.rest;
 
-import kz.ezdrav.eh.ehphysicalexaminationnew.dto.EnterpriseDto;
-import kz.ezdrav.eh.ehphysicalexaminationnew.dto.EnterpriseSaveDto;
+import kz.ezdrav.eh.ehphysicalexaminationnew.dto.*;
 import kz.ezdrav.eh.ehphysicalexaminationnew.repository.EnterpriseRepository;
 import kz.ezdrav.eh.ehphysicalexaminationnew.service.EnterpriseService;
 import lombok.RequiredArgsConstructor;
@@ -27,10 +26,9 @@ public class EnterpriseController {
     public ResponseEntity<String> saveEnterprise( @RequestBody EnterpriseSaveDto saveDto){
         return enterpriseService.save(saveDto);
     }
-
-
-
-
-
+    @PutMapping({"/v1/enterprise/status/{id}", "/internal/v1/enterprise/status/{id}"})
+    public ResponseEntity<StatusEnterpriseDto> getStatusEnterprise(@PathVariable Long id){
+        return enterpriseService.getStatusEnterprise(id);
+    }
 
 }

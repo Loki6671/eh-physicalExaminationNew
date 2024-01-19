@@ -95,4 +95,23 @@ public class PatientService {
             return ResponseEntity.badRequest().body("Patient by inn not found");
         }
     }
+
+    public List<Patient> getPatientByEnterprise(Enterprise enterprise){
+        return patientRepository.findByEnterprise(enterprise);
+    }
+
+    public int getCountPatientsByEnterprise(Enterprise enterprise){
+        return patientRepository.countByEnterprise(enterprise);
+    }
+    public int countByEnterpriseAndGender(Enterprise enterprise){
+        return patientRepository.countByEnterpriseAndGender(enterprise,false);
+    }
+    public int countPatientsWithMultipleDangers(){
+        int i = patientRepository.countPatientsWithMultipleDangers();
+        return i;
+    }
+    public int countFemalePatientsWithMultipleDangers(){
+        int i = patientRepository.countFemalePatientsWithMultipleDangers();
+        return i;
+    }
 }

@@ -21,4 +21,6 @@ public class Enterprise {
     @ManyToOne
     private Region region;
     private String address;
+    @ManyToOne
+    private Organization organization;
 }

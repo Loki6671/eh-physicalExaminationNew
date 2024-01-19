@@ -22,4 +22,6 @@ public class ConsolidatedReport {
     private LocalDateTime endDate;
     private LocalDateTime dateSubmit;
     private Boolean confirmed;
+    @OneToOne
+    private Event event;
 }

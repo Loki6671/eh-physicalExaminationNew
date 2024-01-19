@@ -20,6 +20,7 @@ import org.bouncycastle.util.Store;
 import org.bouncycastle.util.encoders.Base64;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -36,7 +37,7 @@ public class EventService {
     private final EnterpriseRepository enterpriseRepository;
     private final EventMapper eventMapper;
     private final DangerRepository dangerRepository;
-
+    private final PatientService patientService;
 
     public ResponseEntity<List<EventDto>> getEvent( Long id){
         Optional<Enterprise> byId = enterpriseRepository.findById(id);
@@ -85,6 +86,45 @@ public class EventService {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    public List<Event> findByEnterprise(Enterprise enterprise){
+        return eventRepository.findByEnterprise(enterprise);
+    }
+
+    public Event findById(Long id) throws Exception {
+        Optional<Event> byId = eventRepository.findById(id);
+        if(byId.isPresent()){
+            return byId.get();
+        }else {
+            throw new Exception("Event by id not found");
+        }
+    }
+
+    public ResponseEntity<FinalReportEventDto> getFinalReportEvent(Long id) {
+        Optional<Event> byId = eventRepository.findById(id);
+        if (byId.isPresent()){
+            Event event = byId.get();
+            Enterprise enterprise = event.getEnterprise();
+            int countPatientsByEnterprise = patientService.getCountPatientsByEnterprise(enterprise);
+            int i = patientService.countByEnterpriseAndGender(enterprise);
+            int i1 = patientService.countPatientsWithMultipleDangers();
+            int i2 = patientService.countFemalePatientsWithMultipleDangers();
+            return ResponseEntity.ok(FinalReportEventDto.builder()
+                    .id(event.getId())
+                    .totalEmployees(countPatientsByEnterprise)
+                    .employeesWithHazardsTotal(i1)
+                    .employeesWithHazardsFemale(i2)
+                    .startDate(event.getStartDate())
+                    .endDate(event.getEndDate())
+                    .name(event.getName())
+                    .build());
+
+
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 //TODO signValidate
 //    public ResponseEntity<List<String>> extractSignerInfo(String base64Cms) {
 //        try {

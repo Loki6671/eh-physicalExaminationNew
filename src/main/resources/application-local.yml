@@ -10,6 +10,11 @@ spring:
     url: jdbc:postgresql://${DB_HOST:192.168.34.47}:${DB_PORT:5432}/${DB_NAME:eh-pe}
     username: ${DB_USER:eh-admin}
     password: ${DB_PASSWORD:Aa111111}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri:
 
 oauth2:
   resourceserver:
@@ -27,6 +32,7 @@ oauth2:
 feign:
   url:
     eh-rpn: 'http://localhost:8150'
+    eh-urz: 'http://localhost:8081'
 logging:
   level:
     org:

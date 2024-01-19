@@ -15,7 +15,7 @@ import java.util.List;
 public class EventController {
     private final EventService eventService;
 
-    @GetMapping({"/v1/event/{id}", "/internal/v1/event/{id}"})
+    @GetMapping({"/v1/{id}/event", "/internal/v1//{id}/event"})
     public ResponseEntity<List<EventDto>> getEvents(@PathVariable Long id){
         return eventService.getEvent(id);
     }
@@ -29,6 +29,12 @@ public class EventController {
     public ResponseEntity<String> saveEvent(@RequestBody EventSaveDto saveDto){
         return eventService.save(saveDto);
     }
+
+    @GetMapping({"/v1/event/{id}", "/internal/v1/event/{id}"})
+    public ResponseEntity<FinalReportEventDto> getFinalReportEvent(@PathVariable Long id){
+        return eventService.getFinalReportEvent(id);
+    }
+
 
 
 }

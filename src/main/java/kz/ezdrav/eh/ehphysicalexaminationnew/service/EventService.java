@@ -113,6 +113,7 @@ public class EventService {
                     .id(event.getId())
                     .totalEmployees(countPatientsByEnterprise)
                     .employeesWithHazardsTotal(i1)
+                    .totalFemaleEmployees(i)
                     .employeesWithHazardsFemale(i2)
                     .startDate(event.getStartDate())
                     .endDate(event.getEndDate())
